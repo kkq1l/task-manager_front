@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "./main";
 import Profile from "./pages/Profile";
 import { observer } from "mobx-react-lite";
+import Registration from "./pages/Registration";
 
 function App() {
   const { store } = useContext(Context);
@@ -24,6 +25,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home></Home>} />
+          <Route
+            path="/registration"
+            element={store.isAuth ? <Profile /> : <Registration />}
+          />
           <Route path="/auth" element={store.isAuth ? <Profile /> : <Auth />} />
           <Route
             path="/profile"

@@ -1,27 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Error404 from './pages/Error404'
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Error404 from "./pages/Errors/Error404";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
 
 function App() {
-
   return (
     <>
-      <Header/>
+      <Header />
 
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<Error404/>} />
+          <Route path="/" element={<Home></Home>} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
 
-      <Footer/>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

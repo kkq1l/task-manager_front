@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import { observer } from "mobx-react-lite";
 import Registration from "./pages/Registration";
 import Organization from "./pages/Organization";
+import OrganizationDetails from "./pages/OrganizationDetails";
 
 function App() {
   const { store } = useContext(Context);
@@ -46,6 +47,11 @@ function App() {
                 <Error404 />
               )
             }
+          />
+
+          <Route
+            path="/organization/details"
+            element={<OrganizationDetails />}
           />
         </Routes>
       </BrowserRouter>

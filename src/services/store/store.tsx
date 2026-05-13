@@ -27,7 +27,7 @@ export default class Store {
       localStorage.setItem("refreshToken", response.data.refreshToken);
       console.log(response);
       this.setAuth(true);
-      this.setProfile(response.data.profileData);
+      this.setProfile(response.data.user);
     } catch (e) {
       console.log(e);
     }
@@ -64,10 +64,12 @@ export default class Store {
         { token: refreshToken },
         { withCredentials: true }
       );
-      console.log(response);
-      console.log(response.data.profileData);
+      console.log("checkAuth full repsone", response);
+      console.log("profile data? ", response.data.user);
       localStorage.setItem("token", response.data.accessToken);
       this.setAuth(true);
+      this.setProfile(response.data.user);
+      console.log("this is check auth", this.profileData);
     } catch (e) {
       console.log(e);
     }

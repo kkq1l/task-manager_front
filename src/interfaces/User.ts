@@ -1,5 +1,5 @@
 export interface IUser {
-  department: string;
-  name: string;
-  phone: string;
+  login: string;
+  roles: string;
+  user_id: string;
 }

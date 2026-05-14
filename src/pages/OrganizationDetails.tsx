@@ -4,6 +4,8 @@ import OrganizationService from "../services/Organization/OrganizationService";
 import type { OrganizationDetailsResponse } from "../services/Organization/OrganizationDetailsResponse";
 import DepartmentService from "../services/DepartmentService";
 import type IDepartmentCreate from "../interfaces/IDepartmentCreate";
+import UserService from "../services/UserService";
+import type IUserData from "../interfaces/IUsers";
 
 const OrganizationDetails = () => {
   const location = useLocation();
@@ -16,11 +18,14 @@ const OrganizationDetails = () => {
   const [depName, setDepName] = useState<string>("");
   const [depType, setDepType] = useState<string>("creator");
 
+  const [users, setUsers] = useState<IUserData>();
+
   console.log("org_id ", org_id);
 
   useEffect(() => {
     loadDetails();
     loadDep();
+    loadAdmins();
   }, []);
 
   const loadDetails = async () => {
@@ -62,6 +67,23 @@ const OrganizationDetails = () => {
     setDepType("creator");
 
     setDep([...departments, updateData]);
+  };
+
+  const loadAdmins = async () => {
+    const body: IUserData = {
+      org_id: org_id,
+      roles: "admin",
+    };
+
+    try {
+      const response = await UserService.loadAll(body);
+
+      const usersList = response.data;
+      setUsers(usersList);
+      console.log("users ", response);
+    } catch (e) {
+      console.log("users ", e);
+    }
   };
   return (
     <div>
@@ -110,6 +132,21 @@ const OrganizationDetails = () => {
           <p>ИНН: {organization?.inn}</p>
           <p>{organization?.description}</p>
           <p>Статус: {organization?.status}</p>
+          {users ? (
+            <>
+              <h2>Администраторы</h2>
+              {users.map((user, index) => (
+                <li key={index} className="border-b py-2">
+                  <p>{user.login}.</p>
+                </li>
+              ))}
+            </>
+          ) : (
+            <>
+              <p>Администраторы отсутствуют в данной организации</p>
+            </>
+          )}
+
           <h2>Отделения</h2>
           <input type="button" value="Добавить" onClick={() => openModal()} />
           {departments ? (

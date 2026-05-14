@@ -3,6 +3,7 @@ export default interface IUserData {
   login?: string;
   type?: string;
   roles?: string;
+  password?: string;
   sysetem_id?: string;
   org_id: string;
 }

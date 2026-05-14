@@ -209,7 +209,7 @@ const OrganizationDetails = () => {
             value="Добавить"
             onClick={() => openModalUser()}
           />
-          {users ? (
+          {users.length != 0 ? (
             <>
               {users.map((user, index) => (
                 <li key={index} className="border-b py-2">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OrganizationService from "../services/Organization/OrganizationService";
 import type { OrganizationDetailsResponse } from "../services/Organization/OrganizationDetailsResponse";
 import DepartmentService from "../services/DepartmentService";
@@ -25,6 +25,8 @@ const OrganizationDetails = () => {
   const [pwd, setPwd] = useState<string>("");
 
   console.log("org_id ", org_id);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDetails();
@@ -112,6 +114,12 @@ const OrganizationDetails = () => {
     closeModalUser();
 
     setUsers([...users, usersList]);
+  };
+
+  const openDepartment = (dep_id: string) => {
+    navigate("/department_view", {
+      state: { dep_id: dep_id },
+    });
   };
   return (
     <div>
@@ -228,7 +236,11 @@ const OrganizationDetails = () => {
           {departments ? (
             <>
               {departments.map((department, index) => (
-                <li key={index} className="border-b py-2">
+                <li
+                  key={index}
+                  className="border-b py-2"
+                  onClick={() => openDepartment(department.dep_id!)}
+                >
                   <p>Наименование: {department.name}.</p>
                 </li>
               ))}

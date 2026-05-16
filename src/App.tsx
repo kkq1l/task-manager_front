@@ -12,6 +12,7 @@ import { observer } from "mobx-react-lite";
 import Registration from "./pages/Registration";
 import Organization from "./pages/Organization";
 import OrganizationDetails from "./pages/OrganizationDetails";
+import DepartmentView from "./pages/DepartmentView";
 
 function App() {
   const { store } = useContext(Context);
@@ -53,6 +54,8 @@ function App() {
             path="/organization/details"
             element={<OrganizationDetails />}
           />
+
+          <Route path="department_view" element={<DepartmentView />} />
         </Routes>
       </BrowserRouter>
 

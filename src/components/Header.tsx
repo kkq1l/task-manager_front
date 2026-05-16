@@ -13,14 +13,12 @@ const Header = () => {
         <a href="/product" className="hover:text-black">
           О продукте
         </a>
-        {store.profileData.roles === "super_admin" ? (
+        {store.profileData.roles === "super_admin" && (
           <>
             <a href="/organization" className="hover:text-black">
               Организации
             </a>
           </>
-        ) : (
-          <></>
         )}
         {!store.isAuth ? (
           <>
@@ -33,7 +31,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            <a href="profile" className="hover:text-black">
+            <a href="ticket" className="hover:text-black">
               Создать тикет
             </a>
             <a href="profile" className="hover:text-black">

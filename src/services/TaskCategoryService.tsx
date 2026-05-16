@@ -10,7 +10,7 @@ export default class TaskCategoryService {
 
   static async create(
     body: ITaskCategory
-  ): Promise<AxiosResponse<ITaskCategory[]>> {
+  ): Promise<AxiosResponse<ITaskCategory>> {
     const response = $api.post("/task-category/create", body);
     return response;
   }

@@ -68,7 +68,15 @@ const DepartmentView = () => {
 
     const response = await TaskCategoryService.create(body);
 
-    console.log(response.data);
+    const data = response.data;
+
+    closeModal();
+
+    setCatPrimary(false);
+    setCatDescription("");
+    setCatName("");
+
+    setCat([...categorys, data]);
   };
 
   return (

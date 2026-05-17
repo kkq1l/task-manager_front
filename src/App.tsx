@@ -14,6 +14,7 @@ import Organization from "./pages/Organization";
 import OrganizationDetails from "./pages/OrganizationDetails";
 import DepartmentView from "./pages/DepartmentView";
 import TaskCreate from "./pages/TaskCreate";
+import Tasks from "./pages/Tasks";
 
 function App() {
   const { store } = useContext(Context);
@@ -58,6 +59,7 @@ function App() {
 
           <Route path="department_view" element={<DepartmentView />} />
           <Route path="ticket" element={<TaskCreate />} />
+          <Route path="tasks" element={<Tasks />} />
         </Routes>
       </BrowserRouter>
 

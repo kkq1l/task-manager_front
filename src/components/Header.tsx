@@ -20,6 +20,14 @@ const Header = () => {
             </a>
           </>
         )}
+        {(store.profileData.roles === "super_admin" ||
+          store.profileData.roles === "admin") && (
+          <>
+            <a href="/tasks" className="hover:text-black">
+              Задачи
+            </a>
+          </>
+        )}
         {!store.isAuth ? (
           <>
             <a href="auth" className="hover:text-black">

@@ -35,6 +35,9 @@ const TaskCreate = () => {
     const response = await TaskService.create(body);
 
     console.log("createTask", response);
+
+    setTextProblem("");
+    setCatType("");
   };
   return (
     <div>
@@ -48,7 +51,7 @@ const TaskCreate = () => {
                 onChange={(e) => setCatType(e.target.value)}
                 className="w-full flex-1 bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               >
-                <option value="" disabled selected hidden>
+                <option value="" disabled hidden>
                   Выберите вашу проблему из списка
                 </option>
                 {categorys.map((category, index) => (

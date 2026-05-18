@@ -1,6 +1,7 @@
 import type { AxiosResponse } from "axios";
 import $api from "./api";
 import type IUserData from "../interfaces/IUsers";
+import type IUserProfileData from "../interfaces/IUserProfileData";
 
 export default class UserService {
   static async loadAll(body: IUserData): Promise<AxiosResponse<IUserData[]>> {
@@ -12,6 +13,13 @@ export default class UserService {
   static async create(body: IUserData): Promise<AxiosResponse<IUserData>> {
     const response = $api.post("/users/registr_user", body);
 
+    return response;
+  }
+
+  static async loadProfile(
+    id: string
+  ): Promise<AxiosResponse<IUserProfileData>> {
+    const response = $api.get(`users/mydata/${id}`);
     return response;
   }
 }

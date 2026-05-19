@@ -4,6 +4,8 @@ import DepartmentService from "../services/DepartmentService";
 import type IDepartmentDetail from "../interfaces/IDepartmentDetail";
 import TaskCategoryService from "../services/TaskCategoryService";
 import type ITaskCategory from "../interfaces/ITaskCategory";
+import InviteService from "../services/InviteService";
+import type IInvite from "../interfaces/IInvite";
 
 const DepartmentView = () => {
   const location = useLocation();
@@ -17,6 +19,10 @@ const DepartmentView = () => {
   const [catName, setCatName] = useState<string>("");
   const [catDescription, setCatDescription] = useState<string>("");
   const [catPrimary, setCatPrimary] = useState<boolean>(true);
+
+  const [isModalOpenInvite, setIsModalOpenInvite] = useState<boolean>(false);
+  const [inviteLenght, setInviteLenght] = useState<number>(0);
+  const [inviteEndDate, setInviteEndDate] = useState<string>();
 
   useEffect(() => {
     loadDepartment();
@@ -79,9 +85,76 @@ const DepartmentView = () => {
     setCat([...categorys, data]);
   };
 
+  const openModalForInvite = () => {
+    setIsModalOpenInvite(true);
+  };
+
+  const closeModalForInvite = () => {
+    setIsModalOpenInvite(false);
+  };
+
+  const createInvite = async () => {
+    const body: IInvite = {
+      dep_id: dep_id,
+    };
+
+    if (inviteLenght > 0) body.activation = inviteLenght;
+
+    if (inviteEndDate) body.ended_at = inviteEndDate;
+    console.log(body);
+
+    const response = await InviteService.create(body);
+    closeModalForInvite();
+    console.log(response.data);
+  };
+
   return (
     <div>
       DepartmentView
+      <h1>Приглашения</h1>
+      <input
+        type="button"
+        value="Добавить"
+        onClick={() => openModalForInvite()}
+      />
+      {isModalOpenInvite && (
+        <>
+          <div className="max-w-xl w-full mx-auto bg-gray-900 rounded-xl overflow-hidden">
+            <div className="max-w-md mx-auto pt-12 pb-14 px-5">
+              <input
+                placeholder="Кол-во активаций"
+                type="number"
+                value={inviteLenght}
+                onChange={(e) => setInviteLenght(Number(e.target.value))}
+                className="w-full bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+              />
+              <br />
+              <input
+                placeholder="Описание"
+                value={inviteEndDate}
+                onChange={(e) => setInviteEndDate(e.target.value)}
+                className="w-full bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                type="date"
+              />
+              <br />
+            </div>
+            <div className="pt-5 pb-6 px-6 text-right bg-gray-800 -mb-2">
+              <button
+                onClick={() => closeModalForInvite()}
+                className="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center font-semibold leading-6 text-gray-200 bg-gray-500 hover:bg-gray-400 rounded-lg transition duration-200"
+              >
+                Отмена
+              </button>
+              <button
+                onClick={() => createInvite()}
+                className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-green-500 hover:bg-green-600 rounded-lg transition duration-200"
+              >
+                Добавить
+              </button>
+            </div>
+          </div>
+        </>
+      )}
       {isModalOpen && (
         <>
           <div className="max-w-xl w-full mx-auto bg-gray-900 rounded-xl overflow-hidden">

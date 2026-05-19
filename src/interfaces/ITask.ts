@@ -4,4 +4,6 @@ export default interface ITask {
   status?: string;
   text?: string;
   category_id?: string;
+  creator_id?: string;
+  no_status?: string;
 }

@@ -22,4 +22,9 @@ export default class UserService {
     const response = $api.get(`users/mydata/${id}`);
     return response;
   }
+
+  static async saveData(id: string, body: IUserProfileData) {
+    const response = $api.patch(`users/mydata/save/${id}`, body);
+    console.log(body);
+  }
 }

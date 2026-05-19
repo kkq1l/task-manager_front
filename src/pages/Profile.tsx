@@ -3,15 +3,22 @@ import { Context } from "../main";
 import { observer } from "mobx-react-lite";
 import UserService from "../services/UserService";
 import type IUserProfileData from "../interfaces/IUserProfileData";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { store } = useContext(Context);
 
   const [profileData, setProfileData] = useState<IUserProfileData>();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     loadData();
   }, []);
+
+  const openEdit = () => {
+    navigate("/profile_edit");
+  };
 
   const loadData = async () => {
     const user_id = store.profileData.user_id;
@@ -29,6 +36,7 @@ const Profile = () => {
       <p>Распологаюсь: {profileData?.place}</p>
       <p>Мои удаленные доступы: {profileData?.remote_access.id}</p>
       <input type="button" value="Выйти" onClick={() => store.logout()} />
+      <input type="buttin" value="Редактировать" onClick={() => openEdit()} />
     </div>
   );
 };

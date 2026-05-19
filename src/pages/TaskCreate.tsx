@@ -11,12 +11,13 @@ const TaskCreate = () => {
   const [catType, setCatType] = useState<string>("");
 
   useEffect(() => {
-    loadCategory();
-  }, []);
+    if (store.profileData.roles) loadCategory();
+  }, [store.profileData.roles]);
 
   const loadCategory = async () => {
     const body: ITaskCategory = {
-      org_id_belong: store.profileData.org_id,
+      org_id: store.profileData.org_id,
+      role: store.profileData.roles,
     };
 
     const response = await TaskCategoryService.loadDepCategory(body);

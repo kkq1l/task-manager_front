@@ -8,4 +8,6 @@ export default interface ITaskCategory {
   status?: string;
   org_id_belong?: string;
   text?: string;
+  role?: string;
+  org_id?: string;
 }

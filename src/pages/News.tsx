@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type INews from "../interfaces/INews";
 import { Context } from "../main";
 import NewsService from "../services/NewsService";
@@ -10,6 +10,12 @@ const News = () => {
   const [description, setDescription] = useState<string>("");
   const [notification, setNotification] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(true);
+
+  const [news, setNews] = useState<INews[]>([]);
+
+  useEffect(() => {
+    if (store.profileData.org_id) load();
+  }, [store.profileData.org_id]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -32,6 +38,17 @@ const News = () => {
     const response = await NewsService.create(body);
 
     console.log(response);
+  };
+
+  const load = async () => {
+    const body: INews = {
+      org_id: store.profileData.org_id,
+    };
+    const response = await NewsService.loadAll();
+
+    const [data, n] = response.data;
+
+    setNews(data);
   };
   return (
     <div>
@@ -95,6 +112,18 @@ const News = () => {
       )}
       <h1>News</h1>
       <input type="button" value="Добавить" onClick={() => openModal()} />
+      {news.map((newss, index) => (
+        <li
+          key={index}
+          className="border-b py-2"
+          // onClick={() => openDetails(newss.org_id!)}
+        >
+          <p>
+            Наименование: {newss.title} <br />
+            {newss.description}
+          </p>
+        </li>
+      ))}
     </div>
   );
 };

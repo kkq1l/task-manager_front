@@ -7,4 +7,9 @@ export default class NewsService {
     const response = $api.post("/news/create", body);
     return response;
   }
+
+  static async loadAll() {
+    const response = $api.get("/news/");
+    return response;
+  }
 }

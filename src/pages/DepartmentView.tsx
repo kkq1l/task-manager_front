@@ -23,9 +23,11 @@ const DepartmentView = () => {
   const [isModalOpenInvite, setIsModalOpenInvite] = useState<boolean>(false);
   const [inviteLenght, setInviteLenght] = useState<number>(0);
   const [inviteEndDate, setInviteEndDate] = useState<string>();
+  const [invites, setInvites] = useState<IInvite[]>([]);
 
   useEffect(() => {
     loadDepartment();
+    loadInvite();
     console.log("department_type", department);
     if (department?.department_type == "executor") {
       loadCategory();
@@ -106,8 +108,20 @@ const DepartmentView = () => {
     const response = await InviteService.create(body);
     closeModalForInvite();
     console.log(response.data);
+    setInvites([...invites, response.data]);
   };
 
+  const loadInvite = async () => {
+    const body: ITaskCategory = {
+      dep_id: dep_id,
+    };
+
+    const response = await InviteService.watch(dep_id);
+
+    const [data, n] = response.data;
+
+    setInvites(data);
+  };
   return (
     <div>
       DepartmentView
@@ -117,6 +131,13 @@ const DepartmentView = () => {
         value="Добавить"
         onClick={() => openModalForInvite()}
       />
+      {invites.map((invite, index) => (
+        <li key={index} className="border-b py-2">
+          <p>
+            {invite.code} {invite.status}
+          </p>
+        </li>
+      ))}
       {isModalOpenInvite && (
         <>
           <div className="max-w-xl w-full mx-auto bg-gray-900 rounded-xl overflow-hidden">

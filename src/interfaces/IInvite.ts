@@ -3,4 +3,5 @@ export default interface IInvite {
   activation?: number;
   ended_at?: string;
   status?: string;
+  code?: string;
 }

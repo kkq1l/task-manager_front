@@ -16,6 +16,7 @@ import DepartmentView from "./pages/DepartmentView";
 import TaskCreate from "./pages/TaskCreate";
 import Tasks from "./pages/Tasks";
 import ProfileEdit from "./pages/ProfileEdit";
+import News from "./pages/News";
 
 function App() {
   const { store } = useContext(Context);
@@ -62,6 +63,7 @@ function App() {
           <Route path="ticket" element={<TaskCreate />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="profile_edit" element={<ProfileEdit />} />
+          {store.isAuth && <Route path="news" element={<News />} />}
         </Routes>
       </BrowserRouter>
 

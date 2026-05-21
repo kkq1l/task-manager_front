@@ -18,13 +18,7 @@ import Tasks from "./pages/Tasks";
 import ProfileEdit from "./pages/ProfileEdit";
 import News from "./pages/News";
 
-function App() {
-  const { store } = useContext(Context);
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      store.checkAuth();
-    }
-  }, []);
+function AppPublic() {
   return (
     <>
       <Header />
@@ -32,27 +26,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home></Home>} />
-          <Route
-            path="/registration"
-            element={store.isAuth ? <Profile /> : <Registration />}
-          />
-          <Route path="/auth" element={store.isAuth ? <Profile /> : <Auth />} />
-          <Route
-            path="/profile"
-            element={!store.isAuth ? <Auth /> : <Profile />}
-          />
-          <Route path="*" element={<Error404 />} />
+          <Route path="/registration" element={<Registration />} />
 
-          <Route
-            path="/organization"
-            element={
-              store.profileData.roles === "super_admin" ? (
-                <Organization />
-              ) : (
-                <Error404 />
-              )
-            }
-          />
+          <Route path="*" element={<Error404 />} />
 
           <Route
             path="/organization/details"
@@ -63,7 +39,7 @@ function App() {
           <Route path="ticket" element={<TaskCreate />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="profile_edit" element={<ProfileEdit />} />
-          {store.isAuth && <Route path="news" element={<News />} />}
+          <Route path="auth" element={<Auth />} />
         </Routes>
       </BrowserRouter>
 
@@ -72,4 +48,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default observer(AppPublic);

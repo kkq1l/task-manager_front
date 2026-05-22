@@ -1,6 +1,6 @@
 @import "tailwindcss";
-
-input {
-  border: 1;
-  border-width: 1;
+@layer base {
+  h1 {
+    @apply text-3xl font-bold  mb-4 uppercase;
+  }
 }

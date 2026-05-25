@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "./main";
 import AppPublic from "./AppPublic";
 import AppAuth from "./AppAuth";
+import AppMessenger from "./AppMessenger";
 
 function AppRoute() {
   const { store } = useContext(Context);
@@ -12,7 +13,25 @@ function AppRoute() {
       store.checkAuth();
     }
   }, []);
-  return <>{store.isAuth ? <AppAuth /> : <AppPublic />}</>;
+  return (
+    <>
+      {store.isAuth ? (
+        <AppAuth />
+      ) : (
+        <>
+          {store.system == "tg" ? (
+            <>
+              <AppMessenger />
+            </>
+          ) : (
+            <>
+              <AppPublic />
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
 }
 
 export default observer(AppRoute);

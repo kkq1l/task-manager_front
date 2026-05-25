@@ -8,6 +8,8 @@ import type { IUser } from "../../interfaces/User";
 export default class Store {
   profileData = {} as IUser;
   isAuth = false;
+  system = "";
+  isMessenger = false;
   constructor() {
     makeAutoObservable(this);
   }
@@ -18,6 +20,14 @@ export default class Store {
 
   setProfile(profileData: IUser) {
     this.profileData = profileData;
+  }
+
+  setSystem(sys: string) {
+    this.system = sys;
+  }
+
+  setMessenger(bool: boolean) {
+    this.isMessenger = bool;
   }
 
   async login(username: string, password: string) {

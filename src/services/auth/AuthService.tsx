@@ -10,6 +10,12 @@ export default class AuthService {
     return $api.post<AuthResponse>("/auth/sign-in", { login, pwd });
   }
 
+  static async tgAuth(body: any) {
+    const response = $api.post("/auth/sign-up-messenger", body);
+
+    return response;
+  }
+
   static async registration(
     login: string,
     pwd: string

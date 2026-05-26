@@ -10,6 +10,7 @@ export default class Store {
   isAuth = false;
   system = "";
   isMessenger = false;
+  tgData = "";
   constructor() {
     makeAutoObservable(this);
   }
@@ -28,6 +29,10 @@ export default class Store {
 
   setMessenger(bool: boolean) {
     this.isMessenger = bool;
+  }
+
+  setTgData(body: string) {
+    this.tgData = body;
   }
 
   async login(username: string, password: string) {

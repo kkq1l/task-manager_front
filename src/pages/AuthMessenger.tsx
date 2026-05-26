@@ -1,8 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthService from "../services/auth/AuthService";
+import { Context } from "../main";
 
 const AuthMessenger = () => {
+  const { store } = useContext(Context);
   const [inviteCode, setInviteCode] = useState<string>("");
-  const registUser = async () => {};
+  const registUser = async () => {
+    const body: any = {
+      invite: inviteCode,
+      data: store.tgData,
+      login: "s",
+    };
+    const response = await AuthService.tgAuth(body);
+
+    console.log(response);
+  };
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-xl w-full mx-auto bg-gray-900 rounded-xl overflow-hidden">

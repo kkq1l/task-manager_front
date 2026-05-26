@@ -89,4 +89,18 @@ export default class Store {
       console.log(e);
     }
   }
+
+  async loginWithTg() {
+    try {
+      const body: any = {
+        data: this.tgData,
+      };
+      const response = await AuthService.tgAuth(body);
+      localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
+
+      this.setAuth(true);
+      this.setProfile(response.data.user);
+    } catch (e) {}
+  }
 }

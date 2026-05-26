@@ -11,6 +11,12 @@ export default class AuthService {
   }
 
   static async tgAuth(body: any) {
+    const response = $api.post("/auth/sign-in-messenger", body);
+
+    return response;
+  }
+
+  static async tgSignUp(body: any) {
     const response = $api.post("/auth/sign-up-messenger", body);
 
     return response;

@@ -34,6 +34,7 @@ const initializeTelegramSDK = async () => {
         user_id: user.id,
       };
       store.setSystem("tg");
+      store.setTgData(initData.raw()!);
       // store.setAuth(true);
 
       // console.log("ID пользователя:", window.userId);

@@ -4,4 +4,5 @@ export interface OrganizationDetailsResponse {
   name: string;
   org_id: string;
   status: string;
+  created_at?: string;
 }

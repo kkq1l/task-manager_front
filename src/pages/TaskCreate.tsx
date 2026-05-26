@@ -43,14 +43,14 @@ const TaskCreate = () => {
   return (
     <div>
       <h1>TaskCreate</h1>
-      <div className="max-w-xl w-full mx-auto bg-gray-900 rounded-xl overflow-hidden">
+      <div className="max-w-xl w-full mx-auto bg-[#424769] rounded-xl overflow-hidden">
         {categorys.length != 0 ? (
           <>
             <div className="max-w-md mx-auto pt-12 pb-14 px-5 text-center">
               <select
                 value={catType}
                 onChange={(e) => setCatType(e.target.value)}
-                className="w-full flex-1 bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                className="w-full bg-[#676f9d] text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-[#676f9d] focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               >
                 <option value="" disabled hidden>
                   Выберите вашу проблему из списка
@@ -69,15 +69,15 @@ const TaskCreate = () => {
                 placeholder="Ваша проблема"
                 value={textProblem}
                 onChange={(e) => setTextProblem(e.target.value)}
-                className="w-full bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                className="w-full bg-[#676f9d] text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-[#676f9d]/70 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                 type="text"
               />
               <br />
             </div>
-            <div className="pt-5 pb-6 px-6 text-right bg-gray-800 -mb-2">
+            <div className="pt-5 pb-6 px-6 text-right bg-[#424769] -mb-2">
               <button
                 onClick={() => createTask()}
-                className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-green-500 hover:bg-green-600 rounded-lg transition duration-200"
+                className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-[#f9b17a] hover:bg-[#f9b17a]/70 rounded-lg transition duration-200"
               >
                 Добавить
               </button>

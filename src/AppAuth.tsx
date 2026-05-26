@@ -1,7 +1,5 @@
 import { observer } from "mobx-react-lite";
 import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Error404 from "./pages/Errors/Error404";
 import Home from "./pages/Home";
@@ -33,7 +31,7 @@ function AppAuth() {
         <div className="flex h-screen">
           <Sidebar />
           <div className="flex-1 flex flex-col">
-            <div className="flex-1 overflow-auto p-6">
+            <div className="flex-1 overflow-auto p-6 bg-[#2d3250] text-[#ffffff]">
               <Routes>
                 <Route path="/" element={<Home></Home>} />
                 <Route
@@ -71,6 +69,8 @@ function AppAuth() {
                 <Route path="tasks" element={<Tasks />} />
                 <Route path="profile_edit" element={<ProfileEdit />} />
                 {store.isAuth && <Route path="news" element={<News />} />}
+
+                <Route path="/my_org" element={<OrganizationDetails />} />
               </Routes>
             </div>
           </div>

@@ -5,7 +5,7 @@ import type IUserProfileData from "../interfaces/IUserProfileData";
 
 export default class UserService {
   static async loadAll(body: IUserData): Promise<AxiosResponse<IUserData[]>> {
-    const response = $api.post("/organization/admins", body);
+    const response = $api.post("/organization/users", body);
 
     return response;
   }

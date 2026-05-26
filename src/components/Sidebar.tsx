@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   HiQueueList,
@@ -6,10 +6,14 @@ import {
   HiClipboardDocumentCheck,
   HiUser,
   HiPencilSquare,
+  HiOutlineBuildingOffice,
 } from "react-icons/hi2";
+import { Context } from "../main";
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
+
+  const { store } = useContext(Context);
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -18,7 +22,7 @@ const Sidebar = () => {
       <div
         className={` ${
           sidebar ? "w-72" : "w-20 "
-        } bg-black h-screen p-5 pt-8 relative duration-300`}
+        }  bg-[#424769] h-screen p-5 pt-8 relative duration-300`}
       >
         <HiQueueList
           className={`text-white absolute cursor-pointer right-2 top-2 w-7 h-6 ${
@@ -32,33 +36,49 @@ const Sidebar = () => {
               !sidebar && "scale-0"
             }`}
           >
-            TaskManager
+            QuestManager
           </h1>
         </div>
         <nav className="pt-6">
-          <Link
-            to="organization"
-            className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
-          >
-            <HiBuildingOffice2 className={`w-6 h-7 text-white`} />
-            <span
-              className={`${!sidebar && "hidden"} origin-left duration-200`}
+          {store.profileData.roles == "super_admin" && (
+            <Link
+              to="organization"
+              className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
             >
-              Организации
-            </span>
-          </Link>
-
-          <Link
-            to="tasks"
-            className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
-          >
-            <HiClipboardDocumentCheck className={`w-6 h-7 text-white`} />
-            <span
-              className={`${!sidebar && "hidden"} origin-left duration-200`}
-            >
-              Задачи
-            </span>
-          </Link>
+              <HiBuildingOffice2 className={`w-6 h-7 text-white`} />
+              <span
+                className={`${!sidebar && "hidden"} origin-left duration-200`}
+              >
+                Организации
+              </span>
+            </Link>
+          )}
+          {store.profileData.roles == "admin" && (
+            <>
+              <Link
+                to="my_org"
+                className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
+              >
+                <HiOutlineBuildingOffice className={`w-6 h-7 text-white`} />
+                <span
+                  className={`${!sidebar && "hidden"} origin-left duration-200`}
+                >
+                  Моя организация
+                </span>
+              </Link>
+              <Link
+                to="tasks"
+                className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
+              >
+                <HiClipboardDocumentCheck className={`w-6 h-7 text-white`} />
+                <span
+                  className={`${!sidebar && "hidden"} origin-left duration-200`}
+                >
+                  Задачи
+                </span>
+              </Link>
+            </>
+          )}
 
           <Link
             to="ticket"

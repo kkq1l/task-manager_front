@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrganizationService from "../services/Organization/OrganizationService";
 import type { OrganizationDetailsResponse } from "../services/Organization/OrganizationDetailsResponse";
@@ -6,10 +6,12 @@ import DepartmentService from "../services/DepartmentService";
 import type IDepartmentCreate from "../interfaces/IDepartmentCreate";
 import UserService from "../services/UserService";
 import type IUserData from "../interfaces/IUsers";
+import { Context } from "../main";
+import { observer } from "mobx-react-lite";
 
 const OrganizationDetails = () => {
   const location = useLocation();
-  const org_id = location.state?.org_id;
+  const get_org_id = location.state?.org_id;
   const [organization, setOrg] = useState<OrganizationDetailsResponse>();
 
   const [departments, setDep] = useState<IDepartmentCreate[]>([]);
@@ -24,25 +26,34 @@ const OrganizationDetails = () => {
   const [userLogin, setuserLogin] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
 
-  console.log("org_id ", org_id);
+  const { store } = useContext(Context);
+  const [org_id, setOrgId] = useState<string>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadDetails();
-    loadDep();
-    loadAdmins();
-  }, []);
+    if (store.profileData?.org_id || get_org_id) {
+      let id = "";
+      console.log("use effect ", get_org_id);
+      if (!get_org_id) id = store.profileData.org_id;
+      else id = get_org_id;
 
-  const loadDetails = async () => {
-    const response = await OrganizationService.loadOne(org_id);
+      loadDetails(id);
+      loadDep(id);
+      loadAdmins(id);
+    }
+  }, [store.profileData]);
 
+  const loadDetails = async (id: string) => {
+    const response = await OrganizationService.loadOne(id);
+    const date = new Date(response.data.created_at!);
+    // response.data.created_at = ["123", "2", "2"];
     setOrg(response.data);
     console.log("test ", response.data);
   };
 
-  const loadDep = async () => {
-    const response = await DepartmentService.loadAll(org_id);
+  const loadDep = async (id: string) => {
+    const response = await DepartmentService.loadAll(id);
     const [deps, n] = response.data;
     setDep(deps);
     console.log("qwe", response);
@@ -75,10 +86,10 @@ const OrganizationDetails = () => {
     setDep([...departments, updateData]);
   };
 
-  const loadAdmins = async () => {
+  const loadAdmins = async (id: string) => {
     const body: IUserData = {
-      org_id: org_id,
-      roles: "admin",
+      org_id: id,
+      // roles: "admin",
     };
 
     try {
@@ -103,7 +114,7 @@ const OrganizationDetails = () => {
 
   const createAdmin = async () => {
     const body: IUserData = {
-      org_id: org_id,
+      org_id: org_id!,
       login: userLogin,
       password: pwd,
       roles: "admin",
@@ -120,6 +131,16 @@ const OrganizationDetails = () => {
     navigate("/department_view", {
       state: { dep_id: dep_id },
     });
+  };
+
+  const dateConvert = (body: string) => {
+    const date = new Date(body);
+
+    const day = date.getDate();
+    const month = date.toLocaleString("ru-RU", { month: "long" });
+    const year = date.getFullYear();
+
+    return `${day} ${month} ${year}`;
   };
   return (
     <div>
@@ -206,48 +227,82 @@ const OrganizationDetails = () => {
       )}
       {organization ? (
         <>
-          <h1>{organization?.name}</h1>
-          <p>ИНН: {organization?.inn}</p>
-          <p>{organization?.description}</p>
-          <p>Статус: {organization?.status}</p>
+          <h1>Организация: {organization?.name}</h1>
+          <div className="max-w/5 flex justify-between gap-4">
+            <div className=" w-1/3 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
+              <h2 className="text-center m-0">{organization?.name}</h2>
+              <p className="text-center italic">{organization?.status}</p>
+              <div className="ml-2">
+                <p>Дата регистрации: {dateConvert(organization.created_at!)}</p>
+                <p>ИНН: {organization?.inn}</p>
+                <p>{organization?.description}</p>
+              </div>
+            </div>
+            <div className=" w-1/3 min-h-80 rounded-md mb-4 border-2 border-[#424769]"></div>
+            <div className=" w-1/3 min-h-80 rounded-md mb-4 border-2 border-[#424769]"></div>
+          </div>
 
-          <h2>Администраторы</h2>
-          <input
-            type="button"
-            value="Добавить"
-            onClick={() => openModalUser()}
-          />
-          {users.length != 0 ? (
-            <>
-              {users.map((user, index) => (
-                <li key={index} className="border-b py-2">
-                  <p>{user.login}.</p>
-                </li>
-              ))}
-            </>
-          ) : (
-            <>
-              <p>Администраторы отсутствуют в данной организации</p>
-            </>
-          )}
+          <div className=" max-w/5 min-h-30 rounded-md mb-4 border-2 border-[#424769]">
+            <div className="bg-[#424769] h-8">
+              <h2>Отделения</h2>
+            </div>
+            <div className="p-4">
+              <p
+                className="w-full text-[#f9b17a] text-right"
+                onClick={() => openModal()}
+              >
+                Добавить отдел
+              </p>
+              {departments ? (
+                <>
+                  {departments.map((department, index) => (
+                    <li
+                      key={index}
+                      className="border-b border-[#424769] py-2 "
+                      onClick={() => openDepartment(department.dep_id!)}
+                    >
+                      <p>
+                        {department.name} {department.department_type}
+                      </p>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <>Отделения на данный момент отсутствуют в организации</>
+              )}
+            </div>
+          </div>
 
-          <h2>Отделения</h2>
-          <input type="button" value="Добавить" onClick={() => openModal()} />
-          {departments ? (
-            <>
-              {departments.map((department, index) => (
-                <li
-                  key={index}
-                  className="border-b py-2"
-                  onClick={() => openDepartment(department.dep_id!)}
-                >
-                  <p>Наименование: {department.name}.</p>
-                </li>
-              ))}
-            </>
-          ) : (
-            <></>
-          )}
+          <div className=" max-w/5 min-h-30 rounded-md mb-4 border-2 border-[#424769]">
+            <div className="bg-[#424769] h-8">
+              <h2>Пользователи</h2>
+            </div>
+            <div className="p-4">
+              <p
+                className="w-full text-[#f9b17a] text-right"
+                onClick={() => openModalUser()}
+              >
+                Добавить пользователя
+              </p>
+              {users ? (
+                <>
+                  {users.map((user, index) => (
+                    <li
+                      key={index}
+                      className="border-b border-[#424769] py-2 "
+                      onClick={() => openDepartment(user.login!)}
+                    >
+                      <p>
+                        {user.login} {user.roles}
+                      </p>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <>Пользователей нету в данной организации</>
+              )}
+            </div>
+          </div>
         </>
       ) : (
         <>
@@ -258,4 +313,4 @@ const OrganizationDetails = () => {
   );
 };
 
-export default OrganizationDetails;
+export default observer(OrganizationDetails);

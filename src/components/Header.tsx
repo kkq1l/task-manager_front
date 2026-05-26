@@ -5,7 +5,7 @@ const Header = () => {
   const { store } = useContext(Context);
   return (
     <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <span className="font-semibold">TaskManager</span>
+      <span className="font-semibold">QuestManager</span>
       <nav className="flex gap-6 text-sm text-gray-600">
         <a href="/" className="hover:text-black">
           Главная
@@ -38,9 +38,9 @@ const Header = () => {
             <a href="auth" className="hover:text-black">
               Войти
             </a>
-            <a href="registration" className="hover:text-black">
+            {/* <a href="registration" className="hover:text-black">
               Регистрация
-            </a>
+            </a> */}
           </>
         ) : (
           <>

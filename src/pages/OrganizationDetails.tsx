@@ -38,6 +38,7 @@ const OrganizationDetails = () => {
       if (!get_org_id) id = store.profileData.org_id;
       else id = get_org_id;
 
+      setOrgId(id);
       loadDetails(id);
       loadDep(id);
       loadAdmins(id);

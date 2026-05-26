@@ -24,9 +24,10 @@ export default class AuthService {
 
   static async registration(
     login: string,
-    pwd: string
+    pwd: string,
+    invite: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>("/auth/sign-up", { login, pwd });
+    return $api.post<AuthResponse>("/auth/sign-up", { login, pwd, invite });
   }
 
   static async logout(): Promise<void> {

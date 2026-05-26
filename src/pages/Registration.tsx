@@ -24,7 +24,7 @@ const Registration = () => {
       if (pwdLenght < 8) alert("Ваш пароль слишком короткий");
     }
 
-    store.registration(email!, password!);
+    store.registration(email!, password!, inviteCode!);
   };
   return (
     <div>

@@ -3,4 +3,6 @@ export interface IUser {
   roles: string;
   user_id: string;
   org_id: string;
+  dep_ip?: string;
+  dep_type?: string;
 }

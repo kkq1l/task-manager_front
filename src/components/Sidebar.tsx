@@ -66,18 +66,21 @@ const Sidebar = () => {
                   Моя организация
                 </span>
               </Link>
-              <Link
-                to="tasks"
-                className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
-              >
-                <HiClipboardDocumentCheck className={`w-6 h-7 text-white`} />
-                <span
-                  className={`${!sidebar && "hidden"} origin-left duration-200`}
-                >
-                  Задачи
-                </span>
-              </Link>
             </>
+          )}
+
+          {store.profileData.dep_type == "executor" && (
+            <Link
+              to="tasks"
+              className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
+            >
+              <HiClipboardDocumentCheck className={`w-6 h-7 text-white`} />
+              <span
+                className={`${!sidebar && "hidden"} origin-left duration-200`}
+              >
+                Задачи
+              </span>
+            </Link>
           )}
 
           <Link

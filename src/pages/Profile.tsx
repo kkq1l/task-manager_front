@@ -18,9 +18,11 @@ const Profile = () => {
   const [lengthTasks, setLengthTasks] = useState<number>(0);
 
   useEffect(() => {
-    loadData();
-    loadTasks();
-  }, []);
+    if (store.profileData?.user_id) {
+      loadData();
+      loadTasks();
+    }
+  }, [store.profileData?.user_id]);
 
   const openEdit = () => {
     navigate("/profile_edit");

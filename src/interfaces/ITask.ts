@@ -6,4 +6,6 @@ export default interface ITask {
   category_id?: string;
   creator_id?: string;
   no_status?: string;
+  dep_id?: string;
+  task_id?: string;
 }

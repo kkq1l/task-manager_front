@@ -7,6 +7,7 @@ import {
   HiUser,
   HiPencilSquare,
   HiOutlineBuildingOffice,
+  HiViewColumns,
 } from "react-icons/hi2";
 import { Context } from "../main";
 
@@ -70,17 +71,30 @@ const Sidebar = () => {
           )}
 
           {store.profileData.dep_type == "executor" && (
-            <Link
-              to="tasks"
-              className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
-            >
-              <HiClipboardDocumentCheck className={`w-6 h-7 text-white`} />
-              <span
-                className={`${!sidebar && "hidden"} origin-left duration-200`}
+            <>
+              <Link
+                to="tasks"
+                className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
               >
-                Задачи
-              </span>
-            </Link>
+                <HiClipboardDocumentCheck className={`w-6 h-7 text-white`} />
+                <span
+                  className={`${!sidebar && "hidden"} origin-left duration-200`}
+                >
+                  Задачи
+                </span>
+              </Link>
+              <Link
+                to="kanban"
+                className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
+              >
+                <HiViewColumns className={`w-6 h-7 text-white`} />
+                <span
+                  className={`${!sidebar && "hidden"} origin-left duration-200`}
+                >
+                  Доска
+                </span>
+              </Link>
+            </>
           )}
 
           <Link

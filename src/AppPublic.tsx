@@ -21,10 +21,10 @@ function AppPublic() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home></Home>} />
-          <Route path="/registration" element={<Registration />} />
+          {/* <Route path="/registration" element={<Registration />} /> */}
 
           <Route path="*" element={<Error404 />} />
-
+          {/* 
           <Route
             path="/organization/details"
             element={<OrganizationDetails />}
@@ -33,12 +33,12 @@ function AppPublic() {
           <Route path="department_view" element={<DepartmentView />} />
           <Route path="ticket" element={<TaskCreate />} />
           <Route path="tasks" element={<Tasks />} />
-          <Route path="profile_edit" element={<ProfileEdit />} />
+          <Route path="profile_edit" element={<ProfileEdit />} /> */}
           <Route path="auth" element={<Auth />} />
         </Routes>
       </BrowserRouter>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

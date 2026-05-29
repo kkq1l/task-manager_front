@@ -22,7 +22,7 @@ const initializeTelegramSDK = async () => {
       window.dispatchEvent(new Event("miniAppReady"));
     }
 
-    initData.restore();
+    if (window.WebApp) initData.restore();
     initData.state();
 
     const user = initData.user();

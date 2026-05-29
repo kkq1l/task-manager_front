@@ -83,7 +83,7 @@ const Sidebar = () => {
                   Задачи
                 </span>
               </Link>
-              <Link
+              {/* <Link
                 to="kanban"
                 className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 "
               >
@@ -93,7 +93,7 @@ const Sidebar = () => {
                 >
                   Доска
                 </span>
-              </Link>
+              </Link> */}
             </>
           )}
 

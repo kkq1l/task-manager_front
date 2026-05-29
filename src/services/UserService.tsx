@@ -27,4 +27,9 @@ export default class UserService {
     const response = $api.patch(`users/mydata/save/${id}`, body);
     console.log(body);
   }
+
+  static async activate(id: string) {
+    const response = $api.get(`users//task_activate/${id}`);
+    return response;
+  }
 }

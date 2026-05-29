@@ -10,9 +10,9 @@ const Header = () => {
         <a href="/" className="hover:text-black">
           Главная
         </a>
-        <a href="/product" className="hover:text-black">
+        {/* <a href="/product" className="hover:text-black">
           О продукте
-        </a>
+        </a> */}
         {store.isAuth && (
           <a href="/news" className="hover:text-black">
             Новости

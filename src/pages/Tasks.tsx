@@ -4,12 +4,15 @@ import TaskService from "../services/TaskService";
 import { observer } from "mobx-react-lite";
 import type ITask from "../interfaces/ITask";
 import type ITaskDetails from "../interfaces/ITaskDetails";
+import { useNavigate } from "react-router-dom";
 
 const Tasks = () => {
   const { store } = useContext(Context);
   const [org_id, setOrgId] = useState<string>();
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [tasksDetails, setTasksDetails] = useState<ITaskDetails[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (store.profileData?.org_id) {
@@ -53,6 +56,12 @@ const Tasks = () => {
   const removeItem = (id: string) => {
     setTasks((task) => task.filter((item) => item.task_id !== id));
   };
+
+  const openDetails = (id: string) => {
+    navigate("/task_details", {
+      state: { task_id: id },
+    });
+  };
   return (
     <div>
       <h1>Задачи</h1>
@@ -64,13 +73,17 @@ const Tasks = () => {
           </div>
           <div className="p-4">
             {tasksDetails
-              // .filter(
-              //   (task) =>
-              //     task.task.status === "work" &&
-              //     task.user.user_id === store.profileData.user_id
-              // )
+              .filter(
+                (task) =>
+                  task.task.status === "work" &&
+                  task.user.user_id === store.profileData.user_id
+              )
               .map((task, index) => (
-                <li key={index} className="border-b py-2 flex justify-between">
+                <li
+                  key={index}
+                  className="border-b py-2 flex justify-between"
+                  onClick={() => openDetails(task.task_info_id)}
+                >
                   <p>{task.task.text}</p>
                 </li>
               ))}

@@ -2,6 +2,7 @@ import type ITask from "./ITask";
 import type { IUser } from "./User";
 
 export default interface ITaskDetails {
+  task_info_id: string;
   task_id: string;
   user_id: string;
   task: ITask;

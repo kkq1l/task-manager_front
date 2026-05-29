@@ -1,3 +1,6 @@
+import type ITaskCategory from "./ITaskCategory";
+import type { IUser } from "./User";
+
 export default interface ITask {
   org_id?: string;
   priority?: string;
@@ -8,4 +11,6 @@ export default interface ITask {
   no_status?: string;
   dep_id?: string;
   task_id?: string;
+  category?: ITaskCategory;
+  creator?: IUser;
 }

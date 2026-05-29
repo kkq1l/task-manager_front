@@ -25,4 +25,28 @@ export default class TaskService {
     const response = $api.post(`/tasks/get_tasks`, body);
     return response;
   }
+
+  static async findOneWithoutUserTasks(id: string) {
+    const response = $api.get(`/tasks/get_task/${id}`);
+    return response;
+  }
+
+  static async closeTask(id: string) {
+    const response = $api.get(`/tasks/close_task/${id}`);
+    return response;
+  }
+  static async test(id: string) {
+    const response = $api.get(`/tasks/test/${id}`);
+    return response;
+  }
+
+  static async sendMessage(body: any) {
+    const response = $api.post(`/tasks/send_message/`, body);
+    return response;
+  }
+
+  static async loadMessage(id: string) {
+    const response = $api.get(`/tasks/get_message/${id}`);
+    return response;
+  }
 }

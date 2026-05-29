@@ -49,6 +49,10 @@ const Profile = () => {
     setTasks(data);
     setLengthTasks(n);
   };
+
+  const activate = async (id: string) => {
+    const response = await UserService.activate(id);
+  };
   return (
     <div>
       <h1>Profile {profileData?.name}</h1>
@@ -56,14 +60,30 @@ const Profile = () => {
       <p>Номер телефона: {profileData?.phone}</p>
       <p>Распологаюсь: {profileData?.place}</p>
       <p>Мои удаленные доступы: {profileData?.remote_access.id}</p>
-      <input type="button" value="Выйти" onClick={() => store.logout()} />
-      <input type="buttin" value="Редактировать" onClick={() => openEdit()} />
+      <input
+        type="button"
+        className="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 mt-2 text-center font-semibold leading-6 text-blue-50 bg-[#f9b17a] hover:bg-[#f9b17a]/70 rounded-lg transition duration-200"
+        value="Выйти"
+        onClick={() => store.logout()}
+      />
+      <input
+        type="button"
+        value="Редактировать"
+        className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-[#f9b17a] hover:bg-[#f9b17a]/70 rounded-lg transition duration-200"
+        onClick={() => openEdit()}
+      />
       <div id="opened_tasks">
         <h1>У вас открыто {lengthTasks} задач</h1>
         {tasks.map((task, index) => (
           <li key={index} className="border-b py-2">
             <p>
               {task.text} - {task.status}.
+              <p
+                className="-mt-6 w-full text-[#f9b17a] text-right"
+                onClick={() => activate(task.task_id!)}
+              >
+                Сделать активным
+              </p>
             </p>
           </li>
         ))}

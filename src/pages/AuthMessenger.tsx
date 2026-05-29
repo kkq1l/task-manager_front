@@ -11,8 +11,8 @@ const AuthMessenger = () => {
       data: store.tgData,
     };
     const response = await AuthService.tgSignUp(body);
-
-    console.log(response);
+    //ticket
+    window.location.replace("/tasks");
   };
 
   const auth = async () => {

@@ -17,6 +17,7 @@ import ProfileEdit from "./pages/ProfileEdit";
 import News from "./pages/News";
 import Sidebar from "./components/Sidebar";
 import TaskKanban from "./pages/TaskKanban";
+import TaskDetails from "./pages/TaskDetails";
 
 function AppAuth() {
   const { store } = useContext(Context);
@@ -73,6 +74,7 @@ function AppAuth() {
 
                 <Route path="/my_org" element={<OrganizationDetails />} />
                 <Route path="/kanban" element={<TaskKanban />} />
+                <Route path="/task_details" element={<TaskDetails />} />
               </Routes>
             </div>
           </div>

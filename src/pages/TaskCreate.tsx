@@ -28,6 +28,10 @@ const TaskCreate = () => {
   };
 
   const createTask = async () => {
+    if (!textProblem) {
+      alert("Заполните текст ошибки, описав подробности");
+      return;
+    }
     const body: ITaskCategory = {
       category_id: catType,
       text: textProblem,
@@ -46,7 +50,7 @@ const TaskCreate = () => {
       <div className="max-w-xl w-full mx-auto bg-[#424769] rounded-xl overflow-hidden">
         {categorys.length != 0 ? (
           <>
-            <div className="max-w-md mx-auto pt-12 pb-14 px-5 text-center">
+            <div className="max-w-md mx-auto pt-12 pb-1  px-5 text-center">
               <select
                 value={catType}
                 onChange={(e) => setCatType(e.target.value)}
@@ -74,7 +78,7 @@ const TaskCreate = () => {
               />
               <br />
             </div>
-            <div className="pt-5 pb-6 px-6 text-right bg-[#424769] -mb-2">
+            <div className="ы pb-6 px-6 text-right bg-[#424769] -mb-2">
               <button
                 onClick={() => createTask()}
                 className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-[#f9b17a] hover:bg-[#f9b17a]/70 rounded-lg transition duration-200"

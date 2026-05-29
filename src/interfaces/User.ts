@@ -1,3 +1,5 @@
+import type IUserProfileData from "./IUserProfileData";
+
 export interface IUser {
   login: string;
   roles: string;
@@ -5,4 +7,5 @@ export interface IUser {
   org_id: string;
   dep_id?: string;
   dep_type?: string;
+  profile?: IUserProfileData;
 }

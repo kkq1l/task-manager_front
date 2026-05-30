@@ -55,6 +55,8 @@ const test = async () => {
     initData.restore();
     store.setTestMax(window.WebApp?.initData.user.id);
   }
+
+  console.log(window.WebApp);
 };
 initializeTelegramSDK();
 test();

@@ -11,10 +11,14 @@ export default class Store {
   system = "";
   isMessenger = false;
   tgData = "";
+  test = "";
   constructor() {
     makeAutoObservable(this);
   }
 
+  setTestMax(gg: string) {
+    this.test = gg;
+  }
   setAuth(bool: boolean) {
     this.isAuth = bool;
   }

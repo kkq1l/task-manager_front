@@ -35,6 +35,7 @@ const Auth = () => {
             onClick={() => store.login(email!, password!)}
           />
           <br />
+          {store.test}
         </div>
       </div>
     </div>

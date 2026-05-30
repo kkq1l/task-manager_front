@@ -51,11 +51,6 @@ const initializeTelegramSDK = async () => {
 };
 
 const test = async () => {
-  if (typeof window.WebApp !== "undefined") {
-    initData.restore();
-    store.setTestMax(window.WebApp?.initData.user.id);
-  }
-
   console.error("проверка webapp в окне", window.WebApp);
   console.error("само окно", window);
   console.error("проверка пройденного этапа ");

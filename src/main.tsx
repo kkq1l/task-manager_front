@@ -56,7 +56,9 @@ const test = async () => {
     store.setTestMax(window.WebApp?.initData.user.id);
   }
 
-  console.log(window.WebApp);
+  console.log("проверка webapp в окне", window.WebApp);
+  console.log("само окно", window);
+  console.log("проверка пройденного этапа ");
 };
 initializeTelegramSDK();
 test();

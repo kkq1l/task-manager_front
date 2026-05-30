@@ -22,10 +22,6 @@ const initializeTelegramSDK = async () => {
       window.dispatchEvent(new Event("miniAppReady"));
     }
 
-    if (typeof window.WebApp !== "undefined") {
-      initData.restore();
-      store.setTestMax(InitData.user.id);
-    }
     initData.state();
 
     const user = initData.user();
@@ -53,7 +49,15 @@ const initializeTelegramSDK = async () => {
     console.error("Ошибка инициализации Telegram Mini App:", error);
   }
 };
+
+const test = async () => {
+  if (typeof window.WebApp !== "undefined") {
+    initData.restore();
+    store.setTestMax(window.WebApp?.initData.user.id);
+  }
+};
 initializeTelegramSDK();
+test();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

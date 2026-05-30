@@ -51,7 +51,7 @@ const initializeTelegramSDK = async () => {
 };
 
 const test = async () => {
-  if (window.WebApp) {
+  if (window.WebApp.initData) {
     store.setSystem("max");
     store.setTgData(initData.raw()!);
   } else {

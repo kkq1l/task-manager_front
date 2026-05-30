@@ -51,10 +51,14 @@ const initializeTelegramSDK = async () => {
 };
 
 const test = async () => {
-  console.error("проверка webapp в окне", window.WebApp);
-  console.error("само окно", window);
-  console.error("проверка пройденного этапа ");
+  if (window.WebApp) {
+    store.setSystem("max");
+    store.setTgData(initData.raw()!);
+  } else {
+    console.error("инициализация Max не пройден");
+  }
 };
+
 initializeTelegramSDK();
 test();
 

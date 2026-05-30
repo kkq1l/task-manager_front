@@ -19,7 +19,7 @@ function AppRoute() {
         <AppAuth />
       ) : (
         <>
-          {store.system == "tg" ? (
+          {store.system == "tg" || store.system == "max" ? (
             <>
               <AppMessenger />
             </>

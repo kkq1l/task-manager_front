@@ -55,7 +55,7 @@ const test = async () => {
     store.setSystem("max");
     console.error("сомтри ", window.WebApp);
     console.error("сомтри 2 ", window.WebApp.initData);
-    store.setTgData(window.WebApp.initData.raw()!);
+    store.setTgData(window.WebApp.initData);
   } else {
     console.error("инициализация Max не пройден");
   }

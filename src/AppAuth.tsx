@@ -18,6 +18,8 @@ import News from "./pages/News";
 import Sidebar from "./components/Sidebar";
 import TaskKanban from "./pages/TaskKanban";
 import TaskDetails from "./pages/TaskDetails";
+import Forbidden from "./pages/Errors/Forbidden";
+import TasksList from "./pages/TasksList";
 
 function AppAuth() {
   const { store } = useContext(Context);
@@ -35,20 +37,10 @@ function AppAuth() {
           <div className="flex-1 flex flex-col">
             <div className="flex-1 overflow-auto p-6 bg-[#2d3250] text-[#ffffff]">
               <Routes>
-                <Route path="/" element={<Home></Home>} />
-                <Route
-                  path="/registration"
-                  element={store.isAuth ? <Profile /> : <Registration />}
-                />
-                <Route
-                  path="/auth"
-                  element={store.isAuth ? <Profile /> : <Auth />}
-                />
                 <Route
                   path="/profile"
                   element={!store.isAuth ? <Auth /> : <Profile />}
                 />
-                <Route path="*" element={<Error404 />} />
 
                 <Route
                   path="/organization"
@@ -56,7 +48,7 @@ function AppAuth() {
                     store.profileData.roles === "super_admin" ? (
                       <Organization />
                     ) : (
-                      <Error404 />
+                      <Forbidden />
                     )
                   }
                 />
@@ -75,6 +67,8 @@ function AppAuth() {
                 <Route path="/my_org" element={<OrganizationDetails />} />
                 <Route path="/kanban" element={<TaskKanban />} />
                 <Route path="/task_details" element={<TaskDetails />} />
+                <Route path="my_tasks" element={<TasksList />} />
+                <Route path="*" element={<TaskCreate />} />
               </Routes>
             </div>
           </div>

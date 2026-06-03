@@ -34,10 +34,8 @@ const News = () => {
       notification: notification,
       org_id: store.profileData.org_id,
     };
-    console.log(body);
-    const response = await NewsService.create(body);
 
-    console.log(response);
+    const response = await NewsService.create(body);
   };
 
   const load = async () => {

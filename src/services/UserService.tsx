@@ -25,7 +25,6 @@ export default class UserService {
 
   static async saveData(id: string, body: IUserProfileData) {
     const response = $api.patch(`users/mydata/save/${id}`, body);
-    console.log(body);
   }
 
   static async activate(id: string) {

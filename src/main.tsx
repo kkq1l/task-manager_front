@@ -7,7 +7,6 @@ import AppRoute from "./AppRoute.tsx";
 import { init, initData, miniApp } from "@telegram-apps/sdk";
 
 const store = new Store();
-// const navigate = useNavigate();
 
 export const Context = createContext<IStore>({
   store,
@@ -25,7 +24,6 @@ const initializeTelegramSDK = async () => {
     initData.state();
 
     const user = initData.user();
-    console.log("Данные пользователя:", user);
 
     if (user) {
       const body: any = {
@@ -34,16 +32,7 @@ const initializeTelegramSDK = async () => {
       };
       store.setSystem("tg");
       store.setTgData(initData.raw()!);
-      // store.setAuth(true);
-
-      // console.log("ID пользователя:", window.userId);
-      // console.log("Имя пользователя:", window.firstName);
-
-      // Ожидаем полной готовности всех данных
       window.dispatchEvent(new Event("userIdReady"));
-      // navigate("/auth_tg");
-    } else {
-      console.error("Ошибка: Пользовательские данные не загружены!");
     }
   } catch (error) {
     console.error("Ошибка инициализации Telegram Mini App:", error);
@@ -53,11 +42,8 @@ const initializeTelegramSDK = async () => {
 const test = async () => {
   if (window.WebApp.initData) {
     store.setSystem("max");
-    console.error("сомтри ", window.WebApp);
-    console.error("сомтри 2 ", window.WebApp.initData);
     store.setTgData(window.WebApp.initData);
   } else {
-    console.error("инициализация Max не пройден");
   }
 };
 

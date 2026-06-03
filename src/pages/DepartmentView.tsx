@@ -28,7 +28,7 @@ const DepartmentView = () => {
   useEffect(() => {
     loadDepartment();
     loadInvite();
-    console.log("department_type", department);
+
     if (department?.department_type == "executor") {
       loadCategory();
     }
@@ -44,7 +44,6 @@ const DepartmentView = () => {
     const response = await DepartmentService.detail(dep_id);
 
     setDep(response.data);
-    console.log(response.data);
   };
 
   const loadCategory = async () => {
@@ -103,11 +102,10 @@ const DepartmentView = () => {
     if (inviteLenght > 0) body.activation = inviteLenght;
 
     if (inviteEndDate) body.ended_at = inviteEndDate;
-    console.log(body);
 
     const response = await InviteService.create(body);
     closeModalForInvite();
-    console.log(response.data);
+
     setInvites([...invites, response.data]);
   };
 

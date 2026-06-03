@@ -39,8 +39,6 @@ const TaskCreate = () => {
 
     const response = await TaskService.create(body);
 
-    console.log("createTask", response);
-
     setTextProblem("");
     setCatType("");
   };

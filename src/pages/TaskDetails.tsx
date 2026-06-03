@@ -27,7 +27,7 @@ const TaskDetails = () => {
 
   const loadTasks = async (id: string) => {
     const response = await TaskService.findOneWithoutUserTasks(id);
-    console.log("qweqweqeqwe", response.data);
+
     // const [data] = response.data;
     // console.log()
     setTask(response.data);

@@ -34,7 +34,7 @@ const OrganizationDetails = () => {
   useEffect(() => {
     if (store.profileData?.org_id || get_org_id) {
       let id = "";
-      console.log("use effect ", get_org_id);
+
       if (!get_org_id) id = store.profileData.org_id;
       else id = get_org_id;
 
@@ -50,14 +50,12 @@ const OrganizationDetails = () => {
     const date = new Date(response.data.created_at!);
     // response.data.created_at = ["123", "2", "2"];
     setOrg(response.data);
-    console.log("test ", response.data);
   };
 
   const loadDep = async (id: string) => {
     const response = await DepartmentService.loadAll(id);
     const [deps, n] = response.data;
     setDep(deps);
-    console.log("qwe", response);
   };
 
   const openModal = () => {
@@ -80,7 +78,7 @@ const OrganizationDetails = () => {
     closeModal();
 
     const updateData = response.data;
-    console.log(updateData);
+
     setDepName("");
     setDepType("creator");
 
@@ -99,10 +97,7 @@ const OrganizationDetails = () => {
       const usersList = response.data;
       // const [deps, n] = response.data;
       setUsers(usersList);
-      console.log("users ", response);
-    } catch (e) {
-      console.log("users ", e);
-    }
+    } catch (e) {}
   };
 
   const openModalUser = () => {
@@ -122,7 +117,7 @@ const OrganizationDetails = () => {
     };
     const response = await UserService.create(body);
     const usersList = response.data;
-    console.log(response);
+
     closeModalUser();
 
     setUsers([...users, usersList]);

@@ -44,12 +44,10 @@ export default class Store {
       const response = await AuthService.login(username, password);
       localStorage.setItem("token", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
-      console.log(response);
+
       this.setAuth(true);
       this.setProfile(response.data.user);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   async registration(username: string, password: string, invite: string) {
@@ -61,9 +59,7 @@ export default class Store {
       );
       localStorage.setItem("token", response.data.accessToken);
       this.setAuth(true);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   async logout() {
@@ -73,29 +69,23 @@ export default class Store {
       localStorage.removeItem("token");
       localStorage.removeItem("profileData");
       this.setAuth(false);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   async checkAuth() {
     try {
       const refreshToken = localStorage.getItem("refreshToken");
-      console.log(refreshToken);
+
       const response = await axios.post<AuthResponse>(
         `${API_URL}auth/refresh-token`,
         { token: refreshToken },
         { withCredentials: true }
       );
-      console.log("checkAuth full repsone", response);
-      console.log("profile data? ", response.data.user);
+
       localStorage.setItem("token", response.data.accessToken);
       this.setAuth(true);
       this.setProfile(response.data.user);
-      console.log("this is check auth", this.profileData);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   async loginWithTg() {

@@ -30,11 +30,9 @@ const Profile = () => {
 
   const loadData = async () => {
     const user_id = store.profileData.user_id;
-    console.log("loadData user_id ", user_id);
+
     const response = await UserService.loadProfile(user_id);
     setProfileData(response.data);
-
-    console.log("loadData response ", response);
   };
 
   const loadTasks = async () => {

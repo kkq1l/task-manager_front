@@ -66,8 +66,8 @@ const Tasks = () => {
     <div>
       <h1>Задачи</h1>
 
-      <div className="max-w/5 flex justify-between gap-4">
-        <div className=" w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
+      <div className="lg:flex max-w/5 justify-between gap-4">
+        <div className="w-full lg:w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
           <div className="bg-[#424769] h-8">
             <h2>Мои задачи</h2>
           </div>
@@ -89,7 +89,7 @@ const Tasks = () => {
               ))}
           </div>
         </div>
-        <div className=" w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
+        <div className="w-full lg:w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
           <div className="bg-[#424769] h-8">
             <h2>Новые задачи</h2>
           </div>

@@ -63,8 +63,8 @@ const TaskDetails = () => {
     <div>
       <h1>Подробности задачи</h1>
 
-      <div className="max-w/5 flex justify-between gap-4">
-        <div className=" w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769] p-2">
+      <div className="max-w/5 lg:flex justify-between gap-4">
+        <div className="w-full lg:w-1/2 rounded-md mb-4 border-2 border-[#424769] p-2">
           <p>Пользователь: {task?.task.creator?.profile?.name}</p>
           <p>
             Пользователь распологается: {task?.task.creator?.profile?.place}
@@ -83,7 +83,7 @@ const TaskDetails = () => {
             Закрыть задачу
           </span>
         </div>
-        <div className=" w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
+        <div className="w-full lg:w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
           <div className="w-full mx-auto bg-white dark:bg-zinc-800 shadow-md rounded-lg overflow-hidden">
             <div className="flex flex-col h-[400px]">
               <div className="px-4 py-3 border-b dark:border-zinc-700"></div>

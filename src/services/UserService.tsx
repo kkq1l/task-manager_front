@@ -27,6 +27,11 @@ export default class UserService {
     const response = $api.patch(`users/mydata/save/${id}`, body);
   }
 
+  static async changePassword(id: string, body: any) {
+    const response = $api.patch(`users/${id}`, body);
+    return response;
+  }
+
   static async activate(id: string) {
     const response = $api.get(`users//task_activate/${id}`);
     return response;

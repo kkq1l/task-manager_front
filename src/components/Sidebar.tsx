@@ -8,6 +8,7 @@ import {
   HiPencilSquare,
   HiOutlineBuildingOffice,
   HiViewColumns,
+  HiOutlineDocumentText,
 } from "react-icons/hi2";
 import { Context } from "../main";
 
@@ -52,6 +53,11 @@ const Sidebar = () => {
       text: "Создать тикет",
       to: "ticket",
       icon: <HiPencilSquare className={`w-6 h-7 text-white`} />,
+    },
+    {
+      text: "Мои задачи",
+      to: "my_tasks",
+      icon: <HiOutlineDocumentText className={`w-6 h-7 text-white`} />,
     },
     {
       text: "Профиль",

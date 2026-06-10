@@ -9,6 +9,7 @@ import {
   HiOutlineBuildingOffice,
   HiViewColumns,
   HiOutlineDocumentText,
+  HiMiniNewspaper,
 } from "react-icons/hi2";
 import { Context } from "../main";
 
@@ -20,6 +21,11 @@ const Sidebar = () => {
   const showSidebar = () => setSidebar(!sidebar);
 
   const menu = [
+    {
+      text: "Новости",
+      to: "news",
+      icon: <HiMiniNewspaper className={`w-6 h-7 text-white`} />,
+    },
     ...(store.profileData.roles == "super_admin"
       ? [
           {

@@ -44,7 +44,7 @@ const TaskCreate = () => {
   };
   return (
     <div>
-      <h1>TaskCreate</h1>
+      <h1>Создать задачу</h1>
       <div className="max-w-85% lg:max-w-xl w-full mx-auto bg-[#424769] rounded-xl overflow-hidden">
         {categorys.length != 0 ? (
           <>

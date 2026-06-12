@@ -14,8 +14,9 @@ const TaskCreate = () => {
 
   useEffect(() => {
     if (store.profileData.roles) {
-      if (store.test) navigate("/task_details");
-      else loadCategory();
+      // if (store.test) navigate("/task_details");
+      // else
+      loadCategory();
     }
   }, [store.profileData.roles, store.test]);
 

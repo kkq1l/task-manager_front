@@ -43,10 +43,13 @@ const test = async () => {
   if (window.WebApp.initData) {
     store.setSystem("max");
     store.setTgData(window.WebApp.initData);
-    console.error(initData);
-    console.error("gg wp", initDataUnsafe);
-    if (initData.startParam) {
-      store.setTestMax(initData.startParam!);
+    console.error("1", window.WebApp.initData.start_param);
+    console.error("2", window.WebApp.initData.startParam);
+    console.error("3", initData);
+    console.error("gg wp", window.WebApp.initDataUnsafe.startParam);
+    console.error("gg wp 2", window.WebApp.initDataUnsafe.start_param);
+    if (window.WebApp.initData.startParam) {
+      store.setTestMax(window.WebApp.initData.startParam!);
     }
   } else {
   }

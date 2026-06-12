@@ -43,7 +43,8 @@ const test = async () => {
   if (window.WebApp.initData) {
     store.setSystem("max");
     store.setTgData(window.WebApp.initData);
-    console.error(initData.start_param);
+    console.error(initData);
+    console.error("gg wp", initDataUnsafe);
     if (initData.startParam) {
       store.setTestMax(initData.startParam!);
     }

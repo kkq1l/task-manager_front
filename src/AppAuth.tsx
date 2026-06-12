@@ -23,13 +23,9 @@ import TasksList from "./pages/TasksList";
 
 function AppAuth() {
   const { store } = useContext(Context);
-  const navigation = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
       store.checkAuth();
-    }
-    if (store.test) {
-      navigation("task_details");
     }
   }, []);
   return (

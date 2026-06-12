@@ -3,16 +3,21 @@ import type ITaskCategory from "../interfaces/ITaskCategory";
 import { Context } from "../main";
 import TaskCategoryService from "../services/TaskCategoryService";
 import TaskService from "../services/TaskService";
+import { useNavigate } from "react-router-dom";
 
 const TaskCreate = () => {
   const { store } = useContext(Context);
   const [textProblem, setTextProblem] = useState<string>("");
   const [categorys, setCat] = useState<ITaskCategory[]>([]);
   const [catType, setCatType] = useState<string>("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (store.profileData.roles) loadCategory();
-  }, [store.profileData.roles]);
+    if (store.profileData.roles) {
+      if (store.test) navigate("/task_details");
+      else loadCategory();
+    }
+  }, [store.profileData.roles, store.test]);
 
   const loadCategory = async () => {
     const body: ITaskCategory = {

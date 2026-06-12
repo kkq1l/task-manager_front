@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Error404 from "./pages/Errors/Error404";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
@@ -23,9 +23,13 @@ import TasksList from "./pages/TasksList";
 
 function AppAuth() {
   const { store } = useContext(Context);
+  const navigation = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
       store.checkAuth();
+    }
+    if (store.test) {
+      navigation("task_details");
     }
   }, []);
   return (

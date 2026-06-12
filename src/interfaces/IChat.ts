@@ -1,4 +1,5 @@
 import type ITask from "./ITask";
+import type { IUser } from "./User";
 
 export default interface IChat {
   chat_id: string;
@@ -8,4 +9,5 @@ export default interface IChat {
   updated_at: string;
   coming_system: string;
   task: ITask;
+  author?: IUser;
 }

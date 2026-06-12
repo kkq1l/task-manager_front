@@ -289,7 +289,7 @@ const OrganizationDetails = () => {
                       onClick={() => openDepartment(user.login!)}
                     >
                       <p>
-                        {user.login} {user.roles}
+                        {user.login} - {user.user_name} {user.roles}
                       </p>
                     </li>
                   ))}

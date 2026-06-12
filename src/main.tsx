@@ -43,6 +43,10 @@ const test = async () => {
   if (window.WebApp.initData) {
     store.setSystem("max");
     store.setTgData(window.WebApp.initData);
+    console.error(initData.start_param);
+    if (initData.startParam) {
+      store.setTestMax(initData.startParam!);
+    }
   } else {
   }
 };

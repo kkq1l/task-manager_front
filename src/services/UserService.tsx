@@ -33,7 +33,7 @@ export default class UserService {
   }
 
   static async activate(id: string) {
-    const response = $api.get(`users//task_activate/${id}`);
+    const response = $api.get(`users/task_activate/${id}`);
     return response;
   }
 }

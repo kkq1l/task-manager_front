@@ -9,8 +9,32 @@ const TasksList = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [lengthTasks, setLengthTasks] = useState<number>(0);
 
-  const activate = async (id: string) => {
-    const response = await UserService.activate(id);
+  const activate = async (id: number) => {
+    const response = await UserService.activate(tasks[id].task_id!);
+
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.task_id === task.creator?.active_task
+          ? {
+              ...task,
+              creator: task.creator && { ...task.creator, active_task: "null" },
+            }
+          : task
+      )
+    );
+
+    setTasks((prev) => {
+      const task = [...prev];
+      task[id] = {
+        ...task[id],
+        creator: task[id].creator && {
+          ...task[id].creator,
+          active_task: task[id].task_id,
+        },
+      };
+
+      return task;
+    });
   };
 
   useEffect(() => {
@@ -43,12 +67,18 @@ const TasksList = () => {
               <li key={index} className="border-b py-2">
                 <p>
                   {task.text} - {task.status}.
-                  <p
-                    className="-mt-6 w-full text-[#f9b17a] text-right"
-                    onClick={() => activate(task.task_id!)}
-                  >
-                    Сделать активным
-                  </p>
+                  {task.creator?.active_task == task.task_id ? (
+                    <p className="-mt-6 w-full  text-right">Задача активна</p>
+                  ) : (
+                    <>
+                      <p
+                        className="-mt-6 w-full text-[#f9b17a] text-right"
+                        onClick={() => activate(index)}
+                      >
+                        Сделать активной
+                      </p>
+                    </>
+                  )}
                 </p>
               </li>
             ))}

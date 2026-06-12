@@ -6,4 +6,5 @@ export default interface IUserData {
   password?: string;
   sysetem_id?: string;
   org_id: string;
+  user_name?: string;
 }

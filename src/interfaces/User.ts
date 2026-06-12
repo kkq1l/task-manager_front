@@ -8,4 +8,5 @@ export interface IUser {
   dep_id?: string;
   dep_type?: string;
   profile?: IUserProfileData;
+  active_task?: string;
 }

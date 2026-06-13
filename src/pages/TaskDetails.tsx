@@ -93,10 +93,10 @@ const TaskDetails = () => {
         </div>
 
         {msgList.length != 0 && (
-          <div className="w-full lg:w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
-            <div className="w-full mx-auto bg-white dark:bg-zinc-800 shadow-md rounded-lg overflow-hidden">
+          <div className="w-full  lg:w-1/2 min-h-80 rounded-md mb-4 border-2 border-[#424769]">
+            <div className="w-full  mx-auto bg-zinc-800 shadow-md rounded-lg overflow-hidden">
               <div className="flex flex-col h-[400px]">
-                <div className="px-4 py-3 border-b dark:border-zinc-700"></div>
+                <div className="px-4 py-3 border-zinc-700"></div>
                 <div
                   className="flex-1 p-3 overflow-y-auto flex flex-col space-y-2"
                   id="chatDisplay"
@@ -119,11 +119,11 @@ const TaskDetails = () => {
                   ))}
                 </div>
 
-                <div className="px-3 py-2 border-t dark:border-zinc-700">
+                <div className="px-3 py-2 border-t border-zinc-700">
                   <div className="flex gap-2">
                     <input
                       placeholder="Введите текст..."
-                      className="flex-1 p-2 border rounded-lg dark:bg-zinc-700 dark:text-white dark:border-zinc-600 text-sm"
+                      className="flex-1 p-2 border rounded-lg bg-zinc-700 text-white border-zinc-600 text-sm"
                       id="chatInput"
                       type="text"
                       value={msgText}

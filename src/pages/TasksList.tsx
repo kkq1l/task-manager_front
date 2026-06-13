@@ -65,14 +65,14 @@ const TasksList = () => {
           <div id="opened_tasks">
             {tasks.map((task, index) => (
               <li key={index} className="border-b py-2">
-                <p>
+                <p className="w-full">
                   {task.text} - {task.status}.
                   {task.creator?.active_task == task.task_id ? (
-                    <p className="-mt-6 w-full  text-right">Задача активна</p>
+                    <p className="w-full  text-center">Задача активна</p>
                   ) : (
                     <>
                       <p
-                        className="-mt-6 w-full text-[#f9b17a] text-right"
+                        className="w-full text-[#f9b17a] text-center"
                         onClick={() => activate(index)}
                       >
                         Сделать активной
